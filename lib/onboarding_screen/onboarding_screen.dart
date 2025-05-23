@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:groovo/constants/colors.dart';
-import 'package:groovo/login/login_screen.dart';
+import 'package:groovo/SignIn/sign_in_screen.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        MaterialPageRoute(builder: (_) => const SignInScreen()),
       );
     });
   }
