@@ -1,8 +1,32 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:groovo/constants/colors.dart';
+import 'package:groovo/login/login_screen.dart';
+import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  bool showProgress = false;
+
+  void startProgressAndNavigate() {
+    setState(() {
+      showProgress = true;
+    });
+
+    Timer(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +60,7 @@ class OnboardingScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: height*0.35,
+            bottom: height * 0.30,
             left: 0,
             right: 0,
             child: Image.asset(
@@ -52,7 +76,7 @@ class OnboardingScreen extends StatelessWidget {
             right: 0,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              height: height * 0.38,
+              height: height * 0.32,
               decoration: const BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.only(
@@ -60,82 +84,102 @@ class OnboardingScreen extends StatelessWidget {
                   topRight: Radius.circular(40),
                 ),
               ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Center(
+                      child: const Text.rich(
+                        TextSpan(
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            height: 1.5,
+                          ),
+                          children: [
+                            TextSpan(text: "From the "),
+                            TextSpan(
+                              text: "latest",
+                              style: TextStyle(
+                                color: AppColors.logoColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(text: " to the "),
+                            TextSpan(
+                              text: "greatest",
+                              style: TextStyle(
+                                color: AppColors.logoColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: " hits, play your favorite tracks on ",
+                            ),
+                            TextSpan(
+                              text: "groovo",
+                              style: TextStyle(
+                                color: AppColors.logoColor,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                            TextSpan(text: " now!"),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          
+
+          Positioned(
+            bottom: 50,
+            left: 0,
+            right: 0,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: AppColors.logoColor,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: TextButton(
+                onPressed: startProgressAndNavigate,
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    "Get Started",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 100,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text.rich(
-                    TextSpan(
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        height: 1.5,
-                      ),
-                      children: [
-                        TextSpan(text: "From the "),
-                        TextSpan(
-                          text: "latest",
-                          style: TextStyle(
-                            color: Color(0xFF48D1D7),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(text: " to the "),
-                        TextSpan(
-                          text: "greatest",
-                          style: TextStyle(
-                            color: Color(0xFF48D1D7),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(text: " hits, play your favorite tracks on "),
-                        TextSpan(
-                          text: "musium",
-                          style: TextStyle(
-                            color: Color(0xFF48D1D7),
-                            fontWeight: FontWeight.bold,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                        TextSpan(text: " now!"),
-                      ],
+                  if (showProgress)
+                    ProgressBarAnimation(
+                      duration: const Duration(seconds: 2),
+                      color: AppColors.logoColor,
+                      backgroundColor: Colors.white,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(width: 20, height: 4, color: Color(0xFF48D1D7)),
-                      const SizedBox(width: 4),
-                      Container(width: 8, height: 4, color: Colors.grey[700]),
-                      const SizedBox(width: 4),
-                      Container(width: 8, height: 4, color: Colors.grey[700]),
-                    ],
-                  ),
                   const SizedBox(height: 30),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF48D1D7),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        // Navigate to next screen
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        child: Text(
-                          "Get Started",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
