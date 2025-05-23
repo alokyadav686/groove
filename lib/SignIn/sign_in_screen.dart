@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:groovo/SignIn/login_screen.dart';
 import 'package:groovo/constants/colors.dart';
 import 'package:groovo/SignIn/widget/socialLoginButton.dart';
+import 'package:flutter/gestures.dart';
+import 'package:groovo/signUp/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -63,26 +66,34 @@ class SignInScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
 
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  decoration: BoxDecoration(
-                    color: AppColors.logoColor,
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.cyanAccent.withOpacity(0.5),
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                      ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Log in with a password",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginScreen()),
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    decoration: BoxDecoration(
+                      color: AppColors.logoColor,
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.cyanAccent.withOpacity(0.5),
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Log in with a password",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -90,21 +101,32 @@ class SignInScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                const Text.rich(
-                  TextSpan(
-                    style: TextStyle(color: Colors.white70),
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(color: Colors.white70),
                     children: [
-                      TextSpan(text: "Don’t have an account? "),
+                      const TextSpan(text: "Don’t have an account? "),
                       TextSpan(
                         text: "Sign Up",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.logoColor,
                           fontWeight: FontWeight.bold,
                         ),
+                        recognizer:
+                            TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUpScreen(),
+                                  ),
+                                );
+                              },
                       ),
                     ],
                   ),
                 ),
+
                 const SizedBox(height: 20),
               ],
             ),
