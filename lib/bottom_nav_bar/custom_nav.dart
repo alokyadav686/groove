@@ -15,7 +15,17 @@ final void Function(int index) onItemSelected;
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      decoration: BoxDecoration(color: AppColors.primaryColor),
+      decoration: BoxDecoration(
+        color: AppColors.primaryColor,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.primaryColor,
+            offset: Offset(0, -4),
+            blurRadius: 40,
+            spreadRadius: 4
+          )
+        ]
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -34,14 +44,14 @@ final void Function(int index) onItemSelected;
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: isSelected? AppColors.logoColor: Colors.white),
           SizedBox(height: 4,),
           Text(
             label,
             style: TextStyle(
-              color: Colors.white,
+              color:isSelected? AppColors.logoColor: Colors.white,
               fontSize: 14,
-              fontWeight: FontWeight.w500,
+              fontWeight: isSelected? FontWeight.w700: FontWeight.w500,
             ),
           ),
         ],

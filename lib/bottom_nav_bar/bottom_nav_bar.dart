@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:groovo/bottom_nav_bar/custom_nav.dart';
-import 'package:groovo/constants/colors.dart';
 import 'package:groovo/views/homeScreen/home_screen.dart';
+import 'package:groovo/views/libraryScreen/library_screen.dart';
 import 'package:groovo/views/searchScreen/search_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -18,7 +18,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _screens = [
     HomeScreen(),
     SearchScreen(),
-    HomeScreen(),
+    LibraryScreen(),
     ];
     void _onItemTapped(int index) {
     setState(() {
@@ -28,7 +28,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor,
       body: _screens[_selectedIndex],
       bottomNavigationBar: CustomNav(
         selectedIndex: _selectedIndex,
