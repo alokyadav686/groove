@@ -15,7 +15,7 @@ class TopBar extends StatelessWidget {
               backgroundImage: NetworkImage('https://i.pravatar.cc/300'),
             ),
             SizedBox(width: 10),
-            Text("Welcome back!\nchandrama", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            Text("Welcome back!\nchandrama", style: TextStyle(color: Colors.white,fontSize: 16, fontWeight: FontWeight.w600)),
           ],
         ),
         Row(

@@ -2,35 +2,50 @@ import 'package:flutter/material.dart';
 
 class TopMixes extends StatelessWidget {
   const TopMixes({super.key});
+   final List<Map<String, String>> mixes = const [
+    {
+      "title": "Pop Mix",
+      "imageUrl":
+          "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
+    },
+    {
+      "title": "Chill Mix",
+      "imageUrl":
+          "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
+    },
+    {
+      "title": "Jazz Mix",
+      "imageUrl":
+          "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
+    },
+    {
+      "title": "Workout Mix",
+      "imageUrl":
+          "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
+    },
+    {
+      "title": "Relaxing Mix",
+      "imageUrl":
+          "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 160,
-      child: ListView(
+      child: ListView.separated(
+        itemCount: mixes.length,
+        separatorBuilder: (context, index) {
+          return const SizedBox(width: 10);
+        },
         scrollDirection: Axis.horizontal,
-        children: [
-          _mixCard(
-            "Pop Mix",
-            "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
-          ),
-          _mixCard(
-            "Chill Mix",
-            "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
-          ),
-          _mixCard(
-            "Chill Mix",
-            "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
-          ),
-          _mixCard(
-            "Chill Mix",
-            "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
-          ),
-          _mixCard(
-            "Chill Mix",
-            "https://yt3.googleusercontent.com/Z8w-S67SqRr1QM3uZVQLzNQc9cIx-l4pokLv17Hd5cnoDIIl16WsNetzycuFeyhKO911kBwbfg=s900-c-k-c0x00ffffff-no-rj",
-          ),
-        ],
+        padding: EdgeInsets.all(16),
+        itemBuilder: (context, index) {
+          final mix = mixes[index];
+          return _mixCard(mix["title"]!, mix["imageUrl"]!);
+         
+        },
       ),
     );
   }
@@ -38,7 +53,6 @@ class TopMixes extends StatelessWidget {
   Widget _mixCard(String title, String imageUrl) {
     return Container(
       width: 140,
-      margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         image: DecorationImage(
@@ -61,7 +75,7 @@ class TopMixes extends StatelessWidget {
             color: Colors.white,
             fontWeight: FontWeight.w500,
             fontSize: 18,
-            overflow: TextOverflow.ellipsis
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),
