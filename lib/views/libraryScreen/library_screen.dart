@@ -82,7 +82,7 @@ class LibraryScreen extends StatelessWidget {
       "Playlists",
       "Artists",
       "Albums",
-      "Podcasts",
+      "Podcasts & Shows",
     ];
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
