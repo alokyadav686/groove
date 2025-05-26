@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:groovo/SignIn/login_screen.dart';
-import 'package:groovo/constants/colors.dart';
+import 'package:groovo/utils/constants/colors.dart';
 import 'package:groovo/SignIn/widget/socialLoginButton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:groovo/signUp/sign_up_screen.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:groovo/constants/colors.dart';
+import 'package:groovo/utils/constants/colors.dart';
 import 'package:groovo/onboarding_screen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {

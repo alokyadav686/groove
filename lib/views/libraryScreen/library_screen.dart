@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovo/constants/colors.dart';
+import 'package:groovo/utils/constants/colors.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});

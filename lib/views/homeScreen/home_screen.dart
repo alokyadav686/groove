@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovo/constants/colors.dart';
+import 'package:groovo/utils/constants/colors.dart';
 import 'package:groovo/views/homeScreen/widgets/continue_listening.dart';
 import 'package:groovo/views/homeScreen/widgets/recent_listening.dart';
 import 'package:groovo/views/homeScreen/widgets/top_bar.dart';
