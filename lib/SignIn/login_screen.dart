@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/gestures.dart';
-import 'package:groovo/SignIn/sign_in_screen.dart';
-import 'package:groovo/bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:groovo/signUp/sign_up_screen.dart';
+import 'package:get/get.dart';
+import 'package:groovo/SignIn/controller/login_controller.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  bool rememberMe = false;
-  bool obscurePassword = true;
+  final LoginController controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: InkWell(
-                    onTap:
-                        () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>  SignInScreen(),
-                          ),
-                        ),
+                    onTap: () => controller.goToSignIn(),
                     child: Icon(Icons.arrow_back, color: Colors.white),
                   ),
                 ),
@@ -58,43 +45,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 16),
 
-                // Password
-                _buildInputField(
-                  icon: Icons.lock,
-                  hintText: 'Password',
-                  obscureText: obscurePassword,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      obscurePassword ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.white54,
+                Obx(
+                  () => _buildInputField(
+                    icon: Icons.lock,
+                    hintText: 'Password',
+                    obscureText: controller.obscurePassword.value,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        controller.obscurePassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: Colors.white54,
+                      ),
+                      onPressed: () => controller.togglePasswordVisibility(),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        obscurePassword = !obscurePassword;
-                      });
-                    },
                   ),
                 ),
 
                 const SizedBox(height: 10),
 
-                Row(
-                  children: [
-                    Checkbox(
-                      value: rememberMe,
-                      onChanged: (value) {
-                        setState(() {
-                          rememberMe = value!;
-                        });
-                      },
-                      checkColor: Colors.black,
-                      activeColor: Colors.cyan,
-                    ),
-                    const Text(
-                      "Remember me",
-                      style: TextStyle(color: Colors.white70),
-                    ),
-                  ],
+                Obx(
+                  () => Row(
+                    children: [
+                      Checkbox(
+                        value: controller.rememberMe.value,
+                        onChanged:
+                            (value) => controller.toggleRememberMe(value!),
+                        checkColor: Colors.black,
+                        activeColor: Colors.cyan,
+                      ),
+                      const Text(
+                        "Remember me",
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(height: 20),
@@ -114,14 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   child: TextButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const BottomNavBar(),
-                                  ),
-                                );
-                    },
+                    onPressed: () => controller.logIn(),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 12),
                       child: Text(
@@ -188,14 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         recognizer:
                             TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => SignUpScreen(),
-                                  ),
-                                );
-                              },
+                              ..onTap = () => controller.goToSignUp(),
                       ),
                     ],
                   ),
