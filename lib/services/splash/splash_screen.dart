@@ -1,37 +1,26 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:groovo/services/splash/controller/splash_controller.dart';
 import 'package:groovo/utils/constants/colors.dart';
-import 'package:groovo/onboarding_screen/onboarding_screen.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
+  final SplashController controller = Get.put(SplashController());
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Timer(Duration(seconds: 2), (){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>OnboardingScreen()));
-
-    });
-  }
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset("assets/images/logo.png"),
-            SizedBox(height: 14),
+            Image.asset(
+              "assets/images/logo.png",
+              fit: BoxFit.contain,
+            ),
+            const SizedBox(height: 14),
             Text(
               "Groovo",
               style: TextStyle(
