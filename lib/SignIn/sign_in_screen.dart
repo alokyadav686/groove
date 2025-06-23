@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:groovo/SignIn/login_screen.dart';
+import 'package:groovo/SignIn/controller/sign_in_controller.dart';
+import 'package:get/get.dart';
 import 'package:groovo/utils/constants/colors.dart';
 import 'package:groovo/SignIn/widget/socialLoginButton.dart';
 import 'package:flutter/gestures.dart';
-import 'package:groovo/signUp/sign_up_screen.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({super.key});
+  SignInScreen({super.key});
+
+  final SignInController controller = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -67,12 +69,7 @@ class SignInScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => LoginScreen()),
-                    );
-                  },
+                  onTap: controller.goToLoginPage,
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -115,12 +112,7 @@ class SignInScreen extends StatelessWidget {
                         recognizer:
                             TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const SignUpScreen(),
-                                  ),
-                                );
+                                controller.goToSignUpPage();
                               },
                       ),
                     ],

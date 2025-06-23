@@ -10,7 +10,7 @@ class OnboardingController extends GetxController {
 
     Timer(const Duration(seconds: 2), () {
       Get.off(
-        () => const SignInScreen(),
+        () =>  SignInScreen(),
         transition: Transition.rightToLeft,
         duration: const Duration(milliseconds: 400),
       );
