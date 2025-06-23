@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:groovo/bottom_nav_bar/controller/bottom_nav_controller.dart';
 import 'package:groovo/bottom_nav_bar/custom_nav.dart';
 import 'package:groovo/views/homeScreen/home_screen.dart';
 import 'package:groovo/views/libraryScreen/library_screen.dart';
 import 'package:groovo/views/searchScreen/search_screen.dart';
 
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+class BottomNavBar extends StatelessWidget {
+  BottomNavBar({super.key});
 
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
+  final BottomNavController controller = Get.put(BottomNavController());
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  
-  int _selectedIndex =0;
+  final List<Widget> screens = [HomeScreen(), SearchScreen(), LibraryScreen()];
 
-  final List<Widget> _screens = [
-    HomeScreen(),
-    SearchScreen(),
-    LibraryScreen(),
-    ];
-    void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: CustomNav(
-        selectedIndex: _selectedIndex,
-        onItemSelected: _onItemTapped,
+      body: Obx(() => screens[controller.selectedIndex.value]),
+      bottomNavigationBar: Obx(
+        () => CustomNav(
+          selectedIndex: controller.selectedIndex.value,
+          onItemSelected: controller.onItemTapped,
+        ),
       ),
     );
   }
