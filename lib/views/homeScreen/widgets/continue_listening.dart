@@ -46,7 +46,7 @@ class ContinueListening extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 4,
+        childAspectRatio: 3,
       ),
       itemBuilder: (_, i) {
         return Container(
